@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fundos profundos e quentes (modo "café noturno" no hero) */
+  --color-espresso-950: #1a0f0a;
+  --color-espresso-900: #241510;
+  --color-cacau-800: #3a2118;
+
+  /* Superfícies claras (seções de respiro) */
+  --color-creme-50: #fbf5ea;
+  --color-creme-100: #f4e9d6;
+  --color-manteiga-200: #ecd9b4;
+
+  /* Acentos de apetite */
+  --color-caramelo-500: #c98a3c;
+  --color-caramelo-400: #dba256;
+  --color-framboesa-500: #b8324a;
+  --color-framboesa-600: #96243a;
+  --color-pistache-400: #9bb27a;
+
+  /* Texto */
+  --color-tinta-900: #2a1a12;
+  --color-tinta-100: #f6ebdc;
+
+  /* Tipografia */
+  --font-display: "Fraunces", "Cormorant Garamond", serif;
+  --font-sans: "Outfit", "Plus Jakarta Sans", sans-serif;
+  --font-script: "Caveat", cursive;
+
+  /* Easing editorial */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    background-color: var(--color-espresso-950);
+    color: var(--color-tinta-100);
+    font-family: var(--font-sans);
+    scroll-behavior: auto;
+  }
+
+  body {
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-caramelo-400);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* Lenis Smooth Scroll integration */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* Custom Editorial Helpers */
+.vignette-espresso {
+  background:
+    radial-gradient(
+      ellipse 78% 62% at 68% 36%,
+      rgba(201, 138, 60, 0.16) 0%,
+      rgba(58, 33, 24, 0.34) 44%,
+      rgba(26, 15, 10, 0.94) 88%
+    ),
+    radial-gradient(
+      ellipse 95% 85% at 22% 72%,
+      rgba(184, 50, 74, 0.1) 0%,
+      transparent 65%
+    );
+}
+
+.vignette-story {
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 28% 45%,
+      rgba(201, 138, 60, 0.12) 0%,
+      rgba(36, 21, 16, 0.5) 55%,
+      rgba(26, 15, 10, 0.96) 95%
+    );
+}
+
+/* Coffee steam animation using compositor transform/opacity */
+@keyframes steam-rise-a {
+  0% {
+    transform: translate3d(0, 6px, 0) scaleX(0.92);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.65;
+  }
+  70% {
+    opacity: 0.42;
+  }
+  100% {
+    transform: translate3d(-4px, -24px, 0) scaleX(1.12);
+    opacity: 0;
+  }
+}
+
+@keyframes steam-rise-b {
+  0% {
+    transform: translate3d(0, 8px, 0) scaleX(0.9);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.55;
+  }
+  75% {
+    opacity: 0.34;
+  }
+  100% {
+    transform: translate3d(5px, -28px, 0) scaleX(1.16);
+    opacity: 0;
+  }
+}
+
+@keyframes organic-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.48;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.14;
+  }
+}
+
+.animate-steam-a {
+  animation: steam-rise-a 4.2s var(--ease-editorial) infinite;
+}
+
+.animate-steam-b {
+  animation: steam-rise-b 5.1s var(--ease-editorial) 1.4s infinite;
+}
+
+.animate-organic-pulse {
+  animation: organic-pulse 3s var(--ease-editorial) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-steam-a,
+  .animate-steam-b,
+  .animate-organic-pulse {
+    animation: none !important;
+  }
+}
